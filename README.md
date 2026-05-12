@@ -1,6 +1,6 @@
 # Памятка системного администратора
 
-📋 Краткий справочник для сисадминов: железо, Windows, сети, Windows Server.
+📋 Краткий справочник для начинающих сисадминов: железо, Windows, сети, Windows Server.
 
 ## Содержание
 - Аппаратная база и установка Windows
@@ -9,7 +9,7 @@
 - Windows Server (Active Directory, GPO)
 
 ## Просмотр
-Сайт доступен по адресу (но не всем): `https://ZeoLino.github.io/sysadmin-cheatsheet`
+Сайт доступен по адресу: `https://ZeoLino.github.io/sysadmin-cheatsheet`
 
 ## P.S.
 Возможно страница будет дополняться
