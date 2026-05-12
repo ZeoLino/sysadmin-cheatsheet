@@ -9,7 +9,7 @@
 - Windows Server (Active Directory, GPO)
 
 ## Просмотр
-Сайт доступен по адресу: `https://ZeoLino.github.io/sysadmin-cheatsheet`
+Сайт доступен по адресу (но не всем): `https://ZeoLino.github.io/sysadmin-cheatsheet`
 
 ## P.S.
 Возможно страница будет дополняться
