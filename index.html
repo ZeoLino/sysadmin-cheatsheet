@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Памятка системного администратора — Железо, Windows, Сети, Windows Server
+    </title>
+    <style>
+      :root {
+        --bg: #f4f6f9;
+        --card-bg: #ffffff;
+        --text: #1e1e2e;
+        --text-secondary: #4a4a5e;
+        --accent: #1a73e8;
+        --accent-soft: #e8f0fe;
+        --border: #e0e4e9;
+        --code-bg: #f0f2f5;
+        --tag-bg: #e8f0fe;
+        --tag-text: #1a73e8;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+        --radius: 10px;
+        --transition: 0.2s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        padding: 20px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        padding: 40px 20px 30px;
+      }
+      header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      header .subtitle {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+      }
+
+      /* Part sections */
+      .part {
+        margin-bottom: 40px;
+      }
+      .part-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .part-title .num {
+        background: var(--accent);
+        color: #fff;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      /* Cards */
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 14px;
+        box-shadow: var(--shadow);
+        transition: box-shadow var(--transition);
+      }
+      .card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+      .card h3 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--text);
+      }
+      .card h3 .emoji {
+        margin-right: 4px;
+      }
+
+      /* Lists */
+      .card ul,
+      .card ol {
+        padding-left: 20px;
+        margin: 6px 0;
+      }
+      .card li {
+        margin-bottom: 5px;
+        color: var(--text-secondary);
+      }
+      .card li strong {
+        color: var(--text);
+      }
+
+      /* Nested lists */
+      .card ul ul,
+      .card ol ul {
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+
+      /* Code */
+      code {
+        background: var(--code-bg);
+        padding: 2px 7px;
+        border-radius: 5px;
+        font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+        font-size: 0.9rem;
+        color: #c7254e;
+        white-space: nowrap;
+      }
+
+      /* Subtle separators inside cards */
+      .card .sep {
+        display: block;
+        height: 1px;
+        background: var(--border);
+        margin: 12px 0;
+      }
+
+      /* Steps (numbered) */
+      .steps {
+        counter-reset: step;
+        list-style: none;
+        padding-left: 0;
+      }
+      .steps li {
+        counter-increment: step;
+        margin-bottom: 8px;
+        padding-left: 28px;
+        position: relative;
+      }
+      .steps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: var(--accent-soft);
+        color: var(--accent);
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        line-height: 22px;
+      }
+
+      /* Tags / inline pills */
+      .tag {
+        display: inline-block;
+        background: var(--tag-bg);
+        color: var(--tag-text);
+        padding: 2px 9px;
+        border-radius: 12px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        margin-right: 4px;
+      }
+
+      /* Responsive */
+      @media (max-width: 640px) {
+        body {
+          padding: 12px;
+        }
+        header {
+          padding: 24px 10px 20px;
+        }
+        header h1 {
+          font-size: 1.5rem;
+        }
+        .card {
+          padding: 16px 18px;
+        }
+      }
+
+      /* Print tweaks */
+      @media print {
+        body {
+          background: #fff;
+        }
+        .card {
+          box-shadow: none;
+          border: 1px solid #ccc;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📋 Памятка системного администратора</h1>
+        <p class="subtitle">Железо, Windows-клиент, Сети, Windows Server</p>
+      </header>
+
+      <!-- ===== ЧАСТЬ 1 ===== -->
+      <div class="part">
+        <div class="part-title">
+          <span class="num">1</span> Аппаратная база и установка
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🧱</span> 1. Компоненты ПК (что и зачем)</h3>
+          <ul>
+            <li>
+              <strong>Процессор (CPU):</strong> «Мозг». Характеристики: частота
+              (ГГц), ядра, сокет.
+            </li>
+            <li>
+              <strong>Материнская плата:</strong> «Нервная система». Важна
+              совместимость сокета с CPU и типа памяти (DDR).
+            </li>
+            <li>
+              <strong>Оперативная память (RAM):</strong> «Быстрая память».
+              Энергозависима.
+            </li>
+            <li>
+              <strong>Накопители (SSD/HDD):</strong> «Долговременная память».
+              SSD (быстрые, M.2/SATA) под систему, HDD (медленные, SATA) под
+              файлы.
+            </li>
+            <li>
+              <strong>Видеокарта (GPU):</strong> Обработка графики. Дискретная
+              (игры/работа) и встроенная (офис).
+            </li>
+            <li><strong>Блок питания (PSU):</strong> «Сердце». Питает всё.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🔌</span> 2. Интерфейсы и BIOS/UEFI (как всё
+            подключить и запустить)
+          </h3>
+          <ul>
+            <li><strong>SATA:</strong> Старый стандарт для HDD/SSD.</li>
+            <li>
+              <strong>M.2:</strong> Современный разъём для скоростных NVMe SSD.
+            </li>
+            <li>
+              <strong>PCI-Express (PCIe):</strong> Слот для видеокарт и других
+              плат расширения.
+            </li>
+            <li>
+              <strong>USB/HDMI/DP:</strong> Внешние подключения периферии и
+              мониторов.
+            </li>
+            <li>
+              <strong>UEFI/BIOS:</strong> Микропрограмма для настройки
+              оборудования до загрузки ОС. Вход при запуске ПК (клавиши Del, F2,
+              F12 — зависит от производителя).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">💿</span> 3. Подготовка и установка Windows
+          </h3>
+          <p><strong>Файловые системы:</strong></p>
+          <ul>
+            <li>
+              <strong>NTFS:</strong> Основная для Windows. Поддерживает файлы
+              любого размера, права доступа, шифрование, журналирование.
+            </li>
+            <li>
+              <strong>FAT32:</strong> Старый стандарт. Ограничение — файл не
+              более 4 ГБ. Применяется для загрузочных флешек.
+            </li>
+            <li>
+              <strong>exFAT:</strong> Эволюция FAT32, нет ограничения в 4 ГБ.
+              Хорошо подходит для внешних дисков и флешек (Windows, macOS,
+              Linux).
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>Разметка диска:</strong></p>
+          <ul>
+            <li>
+              <strong>MBR:</strong> Старый способ. Максимум 2 ТБ, 4 основных
+              раздела. Только Legacy BIOS.
+            </li>
+            <li>
+              <strong>GPT:</strong> Современный. Нет ограничения в 2 ТБ, до 128
+              разделов. Обязателен для UEFI.
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>Создание загрузочной флешки:</strong></p>
+          <ul>
+            <li>
+              <strong>Способ 1 (официальный):</strong> Media Creation Tool с
+              сайта Microsoft.
+            </li>
+            <li>
+              <strong>Способ 2 (сторонний):</strong> Rufus. Выбрать ISO, схему
+              раздела (GPT для UEFI, MBR для Legacy), файловую систему (FAT32
+              или NTFS).
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>Чистая установка (пошагово):</strong></p>
+          <ol class="steps">
+            <li>Вставить флешку в USB-порт.</li>
+            <li>Перезагрузить ПК, войти в UEFI/BIOS.</li>
+            <li>В Boot Menu выбрать загрузку с USB-флешки.</li>
+            <li>
+              Дождаться запуска установщика Windows. Выбрать язык и раскладку.
+            </li>
+            <li>
+              Выбрать <strong>«Выборочная: только установка Windows»</strong> —
+              это чистая установка.
+            </li>
+            <li>
+              Удалить все существующие разделы на целевом диске до «Незанятого
+              пространства».
+            </li>
+            <li>Выбрать незанятое пространство и нажать «Далее».</li>
+            <li>Дождаться завершения копирования файлов и перезагрузок.</li>
+            <li>
+              Пройти первоначальную настройку (регион, раскладка, учётная
+              запись, конфиденциальность).
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ===== ЧАСТЬ 2 ===== -->
+      <div class="part">
+        <div class="part-title">
+          <span class="num">2</span> Администрирование Windows (клиент)
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">⚙️</span> 1. Системное ПО и драйверы</h3>
+          <ul>
+            <li>
+              <strong>Драйверы:</strong> Программы-посредники между ОС и
+              железом. Искать на оф. сайтах производителей (чипсет, видеокарта,
+              сеть).
+            </li>
+            <li>
+              <strong>Точка восстановления:</strong> «Снимок» системы. Создавать
+              перед установкой драйверов/софта.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">👤</span> 2. Учетные записи и безопасность
+          </h3>
+          <ul>
+            <li>
+              <strong>UAC (Контроль учётных записей):</strong> Запрос на
+              подтверждение действий администратора. Не отключать!
+            </li>
+            <li>
+              <strong>Типы учеток:</strong> Администратор (полный доступ) и
+              Стандартный пользователь (безопасный).
+            </li>
+            <li>
+              <strong>Создание учётной записи:</strong>
+              <ul>
+                <li>
+                  <strong>Параметры:</strong> Параметры → Учётные записи → Семья
+                  и другие пользователи → Добавить пользователя (локальная или
+                  Microsoft).
+                </li>
+                <li>
+                  <strong>Управление компьютером:</strong>
+                  <code>compmgmt.msc</code> → Локальные пользователи и группы →
+                  Пользователи → ПКМ → Новый пользователь.
+                </li>
+                <li>
+                  <strong>Командная строка:</strong>
+                  <code>net user ИмяПользователя Пароль /add</code>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Редактор локальной групповой политики:</strong>
+              <code>gpedit.msc</code>. Настройка сложности паролей, блокировки
+              экрана и т.д.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🧹</span> 3. Реестр и автозагрузка (чистим
+            систему)
+          </h3>
+          <ul>
+            <li>
+              <strong>Реестр (regedit):</strong> База данных настроек Windows.
+              Иерархическая (разделы HKEY_*). Опасен для необдуманных правок.
+            </li>
+            <li>
+              <strong>Автозагрузка:</strong> Управляется в:
+              <ul>
+                <li>
+                  <strong>Диспетчере задач</strong> (вкладка «Автозагрузка»).
+                </li>
+                <li><strong>msconfig</strong> (вкладка «Автозагрузка»).</li>
+                <li>
+                  <strong>Планировщике заданий</strong>
+                  (<code>taskschd.msc</code>).
+                </li>
+                <li>
+                  <strong>Папке автозагрузки:</strong>
+                  <code>shell:startup</code> (текущий пользователь) или
+                  <code
+                    >C:\ProgramData\Microsoft\Windows\Start
+                    Menu\Programs\StartUp</code
+                  >
+                  (все пользователи).
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🔐</span> 4. Права и общий доступ</h3>
+          <p><strong>Разрешения NTFS (локальный доступ):</strong></p>
+          <ul>
+            <li>
+              Управляют доступом на уровне файловой системы — когда пользователь
+              сидит прямо за этим компьютером.
+            </li>
+            <li>
+              <strong>Основные права:</strong> Чтение, Запись, Изменение, Полный
+              доступ.
+            </li>
+            <li>
+              <strong>Настройка:</strong> ПКМ по папке → Свойства → вкладка
+              «Безопасность» → Изменить.
+            </li>
+            <li>
+              <strong>Наследование:</strong> Права с родительской папки
+              распространяются на вложенные.
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>Общие папки (SMB — доступ по сети):</strong></p>
+          <ul>
+            <li>Позволяют обращаться к папке с другого компьютера.</li>
+            <li>
+              <strong>Настройка:</strong> ПКМ по папке → Свойства → вкладка
+              «Доступ» → Общий доступ.
+            </li>
+            <li>
+              <strong>Сетевой путь:</strong>
+              <code>\\ИмяКомпьютера\ИмяОбщейПапки</code>
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>Итоговое право (главное правило):</strong></p>
+          <ul>
+            <li>
+              По сети работают <strong>и</strong> Share-права,
+              <strong>и</strong> NTFS-права. Результирующее право —
+              <strong>самое строгое</strong> из них.
+            </li>
+            <li>
+              <em>Пример:</em> Если на шаре «Полный доступ», а на NTFS «Чтение»
+              → пользователь по сети сможет только читать.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">📊</span> 5. Диагностика и мониторинг</h3>
+          <ul>
+            <li>
+              <strong>Диспетчер задач и Монитор ресурсов:</strong> Анализ
+              загрузки CPU, памяти, диска. Поиск «виновников».
+            </li>
+            <li>
+              <strong>Службы (<code>services.msc</code>):</strong> Фоновые
+              процессы ОС. Можно отключить ненужные для производительности.
+            </li>
+            <li>
+              <strong>Журналы событий (<code>eventvwr</code>):</strong> Главный
+              инструмент для выяснения причин ошибок и BSOD (синих экранов).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🩹</span> 6. Восстановление системы</h3>
+          <ul>
+            <li>
+              <strong>Среда восстановления (WinRE):</strong> Загружается с
+              установочной флешки.
+            </li>
+            <li>
+              <strong>Инструменты:</strong> Восстановление при загрузке
+              (исправляет загрузчик), Откат к точке восстановления.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ===== ЧАСТЬ 3 ===== -->
+      <div class="part">
+        <div class="part-title">
+          <span class="num">3</span> Сетевые технологии
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🌐</span> 1. Сетевое оборудование и физическая
+            среда
+          </h3>
+          <p><strong>Сетевое оборудование:</strong></p>
+          <ul>
+            <li>
+              <strong>Концентратор (Hub):</strong> «Глупый» распределитель —
+              дублирует сигнал на все порты. Создаёт коллизии. Почти не
+              используется.
+            </li>
+            <li>
+              <strong>Коммутатор (Switch):</strong> «Умный» распределитель.
+              Передаёт кадры только на нужный порт по MAC-адресу. Работает на
+              L2. Бывают управляемые (с VLAN) и неуправляемые.
+            </li>
+            <li>
+              <strong>Маршрутизатор (Router):</strong> Связывает разные IP-сети.
+              Принимает решение по таблице маршрутизации. Работает на L3.
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>Физическая среда (кабели):</strong></p>
+          <ul>
+            <li>
+              <strong>Витая пара (Ethernet):</strong> Разъём RJ-45. Категории:
+              Cat5e (1 Гбит/с), Cat6 (10 Гбит/с).
+              <ul>
+                <li>
+                  <strong>Прямой кабель:</strong> оба конца T568B. ПК ↔
+                  коммутатор/роутер.
+                </li>
+                <li>
+                  <strong>Перекрёстный кабель:</strong> один конец T568A, другой
+                  T568B. Сейчас почти не нужен (Auto-MDI/MDI-X).
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Оптоволокно (Fiber):</strong> Сигнал светом. Огромные
+              расстояния и скорости, защита от помех.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🛠️</span> 2. Базовая диагностика (первые шаги
+            при «не работает интернет»)
+          </h3>
+          <ul>
+            <li><code>ipconfig /all</code> — все настройки IP.</li>
+            <li>
+              <code>ping 8.8.8.8</code> — проверка связи. Пинг на IP есть, на
+              сайт нет → проблема с DNS.
+            </li>
+            <li><code>tracert ya.ru</code> — на каком этапе теряется пакет.</li>
+            <li><code>pathping</code> — более детальная версия tracert.</li>
+            <li><code>nslookup ya.ru</code> — проверка работы DNS.</li>
+            <li>
+              <code>netstat -ano</code> — кто и на каких портах слушает систему.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">📚</span> 3. Теоретическая база (OSI и TCP/IP)
+          </h3>
+          <ul>
+            <li>
+              <strong>Модель OSI (7 уровней):</strong> Нужна для быстрой
+              локализации проблемы. «Где обрыв: на 1-м (кабель) или на 7-м
+              (неправильный URL)?»
+            </li>
+            <li>
+              <strong>Инкапсуляция:</strong> Данные «упаковываются» спускаясь по
+              уровням (Данные → Сегмент TCP → Пакет IP → Кадр Ethernet).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">📍</span> 4. Адресация (IP и подсети)</h3>
+          <ul>
+            <li>
+              <strong>MAC-адрес:</strong> Физический адрес сетевой карты (L2).
+              Выглядит как <code>00-1A-2B-3C-4D-5E</code>.
+            </li>
+            <li>
+              <strong>IP-адрес (IPv4):</strong> Логический адрес для
+              маршрутизации (L3). Например, <code>192.168.1.10</code>.
+            </li>
+            <li>
+              <strong>Маска подсети:</strong> Определяет границу сети.
+              <ul>
+                <li>
+                  <code>/24</code> = <code>255.255.255.0</code> → сеть
+                  <code>192.168.1.0</code>, хосты <code>192.168.1.1</code> –
+                  <code>192.168.1.254</code>. Всего <strong>254 хоста</strong>.
+                </li>
+                <li>
+                  <code>/25</code> = <code>255.255.255.128</code> → сеть
+                  <code>192.168.1.0</code>, хосты <code>192.168.1.1</code> –
+                  <code>192.168.1.126</code>. Всего <strong>126 хостов</strong>.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Основной шлюз (Default Gateway):</strong> IP-адрес
+              маршрутизатора для выхода в другие сети (например,
+              <code>192.168.1.1</code>).
+            </li>
+            <li>
+              <strong>Пример:</strong> Компьютер с IP
+              <code>192.168.1.10/24</code> находится в сети
+              <code>192.168.1.0/24</code>. Чтобы отправить пакет на
+              <code>8.8.8.8</code>, он обращается к шлюзу
+              <code>192.168.1.1</code>.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🔑</span> 5. Ключевые службы (критично для
+            работы сети)
+          </h3>
+          <ul>
+            <li>
+              <strong>DHCP (Автоматическая выдача IP):</strong> Процесс DORA
+              (Discover → Offer → Request → Acknowledge).
+            </li>
+            <li>
+              <strong>DNS (Система доменных имён):</strong> Преобразует
+              <code>ya.ru</code> в IP-адрес. Иерархическая система.
+            </li>
+            <li>
+              <strong>Типы DNS-записей:</strong> <span class="tag">A</span> Имя
+              → IPv4 &nbsp; <span class="tag">AAAA</span> Имя → IPv6 &nbsp;
+              <span class="tag">CNAME</span> Псевдоним &nbsp;
+              <span class="tag">MX</span> Почтовый сервер.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🚦</span> 6. Маршрутизация и NAT</h3>
+          <ul>
+            <li>
+              <strong>Маршрутизатор:</strong> Связь разных IP-сетей. Таблица
+              маршрутизации — <code>route print</code>.
+            </li>
+            <li>
+              <strong>Router-on-a-Stick:</strong> Один физический интерфейс
+              роутера, разбитый на виртуальные (сабинтерфейсы) для маршрутизации
+              между VLAN.
+            </li>
+            <li>
+              <strong>NAT/PAT:</strong> Технология, позволяющая многим
+              устройствам с «серыми» IP выходить в интернет с одним «белым» IP.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🏷️</span> 7. VLAN и коммутация</h3>
+          <ul>
+            <li>
+              <strong>VLAN (Виртуальные локальные сети):</strong> Разделение
+              одного физического коммутатора на несколько логических,
+              изолированных друг от друга.
+            </li>
+            <li>
+              <strong>Тегированный порт (Trunk):</strong> Передаёт трафик
+              нескольких VLAN.
+            </li>
+            <li>
+              <strong>Нетегированный порт (Access):</strong> Порт в одном VLAN
+              для конечного ПК.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🛡️</span> 8. Безопасность сети</h3>
+          <ul>
+            <li>
+              <strong>ACL (Access Control Lists):</strong> Фильтрация трафика на
+              маршрутизаторах/брандмауэрах.
+            </li>
+            <li>
+              <strong>Брандмауэр (Firewall):</strong> Правила на основе портов,
+              протоколов и IP.
+            </li>
+            <li>
+              <strong>Wi-Fi безопасность:</strong> Только WPA2/3 с надёжным
+              паролем. Гостевая сеть — отдельный SSID с изоляцией клиентов.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="emoji">🚪</span> 9. Удаленный доступ</h3>
+          <ul>
+            <li>
+              <strong>RDP (3389/TCP):</strong> Штатное средство Windows для
+              удалённого управления.
+            </li>
+            <li>
+              <strong>VPN:</strong> Защищённый «туннель» через небезопасный
+              интернет. Позволяет удалённо подключиться к сети офиса (пример —
+              GRE).
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ===== ЧАСТЬ 4 ===== -->
+      <div class="part">
+        <div class="part-title">
+          <span class="num">4</span> Windows Server (инфраструктура предприятия)
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">📦</span> 1. Установка ролей и компонентов
+          </h3>
+          <ul>
+            <li>
+              <strong>Роли (Roles):</strong> Крупные функциональные блоки (AD
+              DS, DNS Server, DHCP Server, Web Server).
+            </li>
+            <li>
+              <strong>Компоненты (Features):</strong> Вспомогательные функции
+              (Telnet Client, .NET Framework, Windows Server Backup).
+            </li>
+            <li>
+              <strong>Установка:</strong>
+              <ul>
+                <li>
+                  <strong>Графический способ:</strong> Server Manager →
+                  Управление → Добавить роли и компоненты.
+                </li>
+                <li>
+                  <strong>PowerShell:</strong>
+                  <code>Install-WindowsFeature -Name ИмяРоли</code> (например,
+                  <code>AD-Domain-Services</code>).
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🏛️</span> 2. Active Directory (AD) и оснастка
+            «AD — пользователи и компьютеры»
+          </h3>
+          <p><strong>Active Directory — фундамент:</strong></p>
+          <ul>
+            <li>
+              <strong>Домен:</strong> Группа ПК и пользователей с единой БД
+              учётных записей (на контроллере домена).
+            </li>
+            <li>
+              <strong>Контроллер домена (DC):</strong> Сервер, где хранится AD.
+            </li>
+            <li>
+              <strong>OU (Organizational Unit):</strong> Контейнер для
+              группировки объектов (пользователи, компьютеры).
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p>
+            <strong
+              >Оснастка «AD — пользователи и компьютеры»
+              (<code>dsa.msc</code>):</strong
+            >
+          </p>
+          <ul>
+            <li>
+              <strong>Создание пользователя:</strong> ПКМ по OU → Создать →
+              Пользователь. Задать имя, логин, начальный пароль.
+            </li>
+            <li>
+              <strong>Создание группы:</strong> ПКМ по OU → Создать → Группа
+              («Глобальная группа безопасности»). Затем добавить пользователей в
+              группу (вкладка «Член групп» у пользователя или «Члены группы» у
+              группы).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🎛️</span> 3. Групповые политики (GPO) — рычаг
+            управления
+          </h3>
+          <ul>
+            <li>
+              Централизованная настройка сотен ПК: пароли, рабочий стол, деплой
+              софта, запрет USB-флешек.
+            </li>
+            <li>
+              <strong>Инструмент:</strong> <code>gpmc.msc</code> (Group Policy
+              Management Console).
+            </li>
+            <li>
+              <strong>Команды на клиенте:</strong>
+              <code>gpupdate /force</code> (применить сейчас),
+              <code>rsop.msc</code> (посмотреть применённое).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <span class="emoji">🌍</span> 4. Сетевые службы в домене (DNS и DHCP
+            на Windows Server)
+          </h3>
+          <p><strong>DNS-сервер:</strong></p>
+          <ul>
+            <li>
+              Устанавливается как роль «DNS-сервер». В домене часто ставится
+              сразу с DC и настраивается автоматически.
+            </li>
+            <li><strong>Оснастка:</strong> <code>dnsmgmt.msc</code>.</li>
+            <li>
+              <strong>Зоны:</strong> Зона прямого просмотра
+              (<code>corp.local</code>), обратная зона.
+            </li>
+            <li>
+              <strong>Создание записи A:</strong> ПКМ по зоне → Создать узел (A)
+              → ввести имя (например, <code>intranet</code>) и IP-адрес.
+            </li>
+            <li>
+              <strong>Проверка:</strong>
+              <code>nslookup intranet.corp.local</code> должен вернуть IP.
+            </li>
+          </ul>
+          <span class="sep"></span>
+          <p><strong>DHCP-сервер:</strong></p>
+          <ul>
+            <li>
+              Устанавливается как роль «DHCP-сервер».
+              <strong>Обязательна авторизация в AD</strong> (ПКМ по серверу →
+              Авторизовать).
+            </li>
+            <li><strong>Оснастка:</strong> <code>dhcpmgmt.msc</code>.</li>
+            <li>
+              <strong>Создание области (Scope):</strong> ПКМ по IPv4 → Создать
+              область. Задать диапазон адресов, маску, шлюз, DNS-серверы.
+            </li>
+            <li>
+              <strong>Резервация:</strong> ПКМ по «Резервирования» → Создать
+              резервирование. Указать IP и MAC-адрес. Незаменимо для серверов и
+              принтеров.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
